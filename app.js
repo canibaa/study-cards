@@ -25,11 +25,21 @@ function renderCards(cards) {
   const area = document.getElementById("card-area");
   area.innerHTML = "";
   cards.forEach(c => {
-    const div = document.createElement("div");
-    div.className = "card";
-    div.innerHTML = `<b>${c.front}</b><p class="answer" style="display:none">${c.back}</p>`;
-    div.addEventListener("click", () => div.querySelector(".answer").style.display = "block");
-    area.appendChild(div);
+    const wrapper = document.createElement("div");
+    wrapper.className = "flip-card";
+
+    wrapper.innerHTML = `
+      <div class="flip-card-inner">
+        <div class="flip-card-front">${c.front}</div>
+        <div class="flip-card-back">${c.back}</div>
+      </div>
+    `;
+
+    wrapper.addEventListener("click", () => {
+      wrapper.classList.toggle("flipped");
+    });
+
+    area.appendChild(wrapper);
   });
 }
 
